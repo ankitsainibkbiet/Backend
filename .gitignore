@@ -1,0 +1,4 @@
+# Complete Backend
+node_modules
+.env
+.vscode
