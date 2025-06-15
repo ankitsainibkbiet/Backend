@@ -1,4 +1,5 @@
-# Complete Backend
+# Complete Backend  
+# npx @tailwindcss/cli -i ./public/input.css -o ./public/output.css --watch
 node_modules
 .env
 .vscode

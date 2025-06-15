@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+     <link rel="stylesheet" href="/output.css">
+    <title>Post-New</title>
+</head>
+
+<body class="font-serif">
+    <p class="m-2">Create New Post :-</p>
+
+    <form action="/post" method="post">
+        <div class="flex flex-col w-fit space-y-1 m-2">
+            <input type="text" placeholder="author name" class="border-1 p-1" name="author"/>
+            <input type="text" placeholder="content" class="border-1 p-1" name="content"/>
+            <button class="border-1 p-1 hover:bg-gray-100 cursor-pointer">
+                Submit
+            </button>
+        </div>
+    </form>
+
+</body>
+
+</html>

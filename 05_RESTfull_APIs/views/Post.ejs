@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quora Posts</title>
+    <link href="/output.css" rel="stylesheet"> <!-- (--watch) is making issue -->
+</head>
+<body class="m-5 font-serif">
+
+    <p class="text-5xl text-red-700 mt-4 mb-6 text-center">Quora Post</p>
+
+    <div class="flex flex-wrap justify-between space-x-6">
+            <% data.forEach((post) => { %>
+            <div class="my-3 p-3 bg-amber-200 text-xl max-w-[350px] min-h-[250px] shadow-md rounded-xl relative">
+                <p class="italic font-semibold">@<%= post.author %></p>
+                <p><%= post.content %></p>
+                <p class="absolute bottom-1 hover:underline"><a href="/post/<%= post.id %>">View Post</a></p>
+            </div>
+            <% }) %>
+    </div>
+
+    <a href="/post/new" class="p-1 hover:underline text-red-700 text-2xl">Create New Post</a>
+
+</body>
+</html>
