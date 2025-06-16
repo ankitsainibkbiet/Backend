@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit-Post</title>
+    <link rel="stylesheet" href="/output.css">
+</head>
+<body class="font-serif m-3 mx-6">
+
+    <div class="space-y-3 text-2xl">
+        <p class="text-5xl text-red-700">Edit Your Post here !</p>
+        <form action="/post/<%= data.id %>?_method=PATCH" method="POST" class="space-y-1">
+            <p>Author : <span><%= data.author %></span></p>
+            <p>Content : <span><%= data.content %></span></p>
+            <label for="content">Change content : </label>
+            <input type="text" placeholder="change content" class="border-1 p-1 rounded-sm" name="content" id="content"/>
+            <button class="border-1 p-1 rounded-sm">submit</button>
+        </form>
+    </div>
+
+</body>
+</html>

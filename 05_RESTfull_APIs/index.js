@@ -2,6 +2,7 @@ import express from "express"
 import path from "path"
 import { fileURLToPath } from "url"
 import {v4 as uuidv4} from "uuid"
+import methodOverride from "method-override"
 
 const app = express()
 const port = 3000
@@ -15,6 +16,7 @@ app.use(express.static(path.join(__dirname, "/public")))
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(methodOverride("_method"))
 
 let data = [
   {
@@ -56,9 +58,29 @@ app.post("/post", (req, res) => {
 });
 
 app.get("/post/:id", (req, res) => {
-    let { id } = req.params
-    const reqData = data.find((post) => post.id === id)
-    res.render("CurrentPost", { data: reqData })
+  let { id } = req.params
+  const reqData = data.find((post) => post.id === id)
+  res.render("CurrentPost", { data: reqData })
+})
+
+app.get("/post/edit/:id", (req, res) => {
+  let { id } = req.params
+  const reqData = data.find((post) => post.id === id)
+  res.render("EditPost", { data: reqData })
+})
+
+app.patch("/post/:id", (req, res) => {
+  const { id } = req.params
+  const newContent = req.body.content
+  const reqData = data.find((post) => post.id === id)
+  reqData.content = newContent
+  res.redirect("/post")
+})
+
+app.delete("/post/:id", (req, res) => {
+  const { id } = req.params
+  data = data.filter((post) => post.id != id)
+  res.redirect("/post")
 })
 
 app.listen(port, () => {
