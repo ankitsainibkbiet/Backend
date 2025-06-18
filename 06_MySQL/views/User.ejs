@@ -17,16 +17,20 @@
       h1 {
         margin-left: 18%;
       }
+      a{
+        font-size: 25px;
+      }
     </style>
   </head>
   <body>
-    <h1>All users are displayed here :</h1>
+    <h1>All users are displayed here : <%= count["count(*)"] %></h1>
     <table>
       <tr>
         <th>ID</th>
         <th>EMAIL</th>
         <th>USERNAME</th>
         <th>EDIT</th>
+        <th>DELETE</th>
       </tr>
       <% users.forEach((data) => { %>
       <tr>
@@ -38,8 +42,14 @@
             <button>edit</button>
           </form>
         </td>
+        <td>
+          <form action="/user/<%= data.id %>?_method=DELETE" method="POST">
+            <button>DELETE</button>
+          </form>
+        </td>
       </tr>
       <% }) %>
     </table>
+    <a href="/user/new">Create New User</a>
   </body>
 </html>

@@ -6,7 +6,7 @@
     <title>Edit-Form</title>
   </head>
   <body>
-    <form action="" method="post">
+    <form action="/user/edit/<%=data.id%>?_method=PATCH" method="POST">
         <span>ID: <%=data.id%></span>
         <br> <br>
         <label for="01">Username: </label>

@@ -4,6 +4,7 @@ import express from "express"
 import path from "path"
 import methodOverride from "method-override"
 import { fileURLToPath } from "url"
+import {v4 as uuidv4} from "uuid" 
 
 const app = express()
 const port = 3000
@@ -36,12 +37,22 @@ const connection = mysql.createConnection({
 })
 
 app.get("/user", (req, res) => {
+  let users
   const q = "SELECT * FROM user;"
+  const q2 = "SELECT count(*) FROM user;"
   try {
     connection.query(q, (err, result) => {
       if (err) throw err
-      const users = result
-      res.render("User.ejs", { users })
+      users = result
+    })
+  } catch (err) {
+    console.log(err)
+  }
+  try {
+    connection.query(q2, (err, result) => {
+      if (err) throw err
+      const count = result[0]
+      res.render("User.ejs", { users, count })
     })
   } catch (err) {
     console.log(err)
@@ -58,6 +69,63 @@ app.get("/user/edit/:id", (req, res) => {
       res.render("Edit.ejs", { data })
     })
   } catch (err) {
+    console.log(err)
+  }
+})
+
+app.patch("/user/edit/:id", (req, res) => {
+  const { id } = req.params
+  const { username: newUsername, password: newPassword } = req.body
+  const q = `SELECT * FROM user WHERE id = "${id}"`
+  try {
+    connection.query(q, (err, result) => {
+      if (err) throw err
+      const data = result[0]
+      if (newPassword !== data.password) {
+        res.send("Wrong Password")
+      } else {
+        const q2 = `UPDATE user SET username = "${newUsername}" WHERE id = "${id}"`
+        try {
+          connection.query(q2, (err, result) => {
+            if(err) throw err
+            res.redirect("/user")
+          })
+        } catch (err) {
+          console.log(err)
+        }
+      }
+    })
+  } catch (err) {
+    console.log(err)
+  }
+})
+
+app.get("/user/new", (req, res) => {
+  res.render("New.ejs")
+})
+
+app.post("/user/new", (req, res) => {
+  const {username, email, password} = req.body
+  const q=`INSERT INTO user(id, username, email, password) VALUES (?, ?, ?, ?);`
+  try{
+    connection.query(q, [uuidv4(), username, email, password], (err, result) => {
+      if(err) throw err
+      res.redirect("/user")
+    })
+  }catch(err){
+    console.log(err)
+  }
+})
+
+app.delete("/user/:id", (req, res) => {
+  const { id } = req.params
+  const q = `DELETE FROM user WHERE id = "${id}";`
+  try{
+    connection.query(q, (err, result) => {
+      if(err) throw err
+      res.redirect("/user")
+    })
+  }catch(err){
     console.log(err)
   }
 })
