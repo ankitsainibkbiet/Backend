@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Users</title>
+    <style>
+      table,
+      td,
+      th {
+        border: 1px solid black;
+        padding: 3px;
+      }
+      body {
+        margin-left: 20%;
+      }
+      h1 {
+        margin-left: 18%;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>All users are displayed here :</h1>
+    <table>
+      <tr>
+        <th>ID</th>
+        <th>EMAIL</th>
+        <th>USERNAME</th>
+        <th>EDIT</th>
+      </tr>
+      <% users.forEach((data) => { %>
+      <tr>
+        <td><%=data.id%></td>
+        <td><%=data.email%></td>
+        <td><%=data.username%></td>
+        <td>
+          <form action="/user/edit/<%= data.id %>" method="get">
+            <button>edit</button>
+          </form>
+        </td>
+      </tr>
+      <% }) %>
+    </table>
+  </body>
+</html>
