@@ -1,5 +1,5 @@
 {
-  "name": "08_mongodb_project",
+  "name": "07_mongodb_01",
   "version": "1.0.0",
   "main": "index.js",
   "type": "module",
@@ -11,12 +11,6 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "@tailwindcss/cli": "^4.1.10",
-    "ejs": "^3.1.10",
-    "express": "^5.1.0",
-    "method-override": "^3.0.0",
-    "mongoose": "^8.16.0",
-    "nodemon": "^3.1.10",
-    "tailwindcss": "^4.1.10"
+    "mongoose": "^8.16.0"
   }
 }
