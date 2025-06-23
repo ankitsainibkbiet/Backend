@@ -6,7 +6,12 @@ const app = express()
 app.use(session({
     secret: "SecretCode",
     resave: false,
-    saveUninitialized: true
+    saveUninitialized: true,
+    cookie: {
+        httpOnly: true,
+        expires: Date.now() + 10*24*60*60*100,
+        maxAge: 10*24*60*60*100
+    }
 }))
 
 app.get("/", (req, res) => {
