@@ -21,11 +21,28 @@ const __dirname = path.dirname(__filename)
 app.set("view engine", "ejs")
 app.set("views", path.join(__dirname, "views"))
 
-app.get("/user", (req, res) => {
-    let { name } = req.query
-    res.send("Hello.ejs", { name })
+app.use((req, res, next) => { // alternate of sending this in res.render
+    res.locals.success = req.flash("success") 
+    res.locals.error = req.flash("error") 
+    next()
+})
+
+app.get("/register", (req, res) => {
+    let { name = "anonymus" } = req.query
+    req.session.name = name
+    if(name == "anonymus"){
+        req.flash("error", "user register failed")  // should be away from where we are using it
+    }else{
+        req.flash("success", "user loggedIN successful")  
+    }
+    res.redirect("/users")
+})
+
+app.get("/users", (req, res) => {
+    res.render("Hello.ejs", { name: req.session.name })
 })
 
 app.listen(port, () => {
     console.log(`app is listening on port ${port}`)
 })
+
