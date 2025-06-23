@@ -1,5 +1,5 @@
 {
-  "name": "10_errorhandling",
+  "name": "11_cookies",
   "version": "1.0.0",
   "main": "index.js",
   "type": "module",
@@ -11,6 +11,7 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "cookie-parser": "^1.4.7",
     "express": "^5.1.0",
     "nodemon": "^3.1.10"
   }
