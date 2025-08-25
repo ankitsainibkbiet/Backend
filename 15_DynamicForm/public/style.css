@@ -1,0 +1,21 @@
+input, .dynamicDiv{
+    margin: 10px;
+}
+
+form{
+    margin: 5px;
+    padding: 10px;
+    border: 2px solid black;
+    border-radius: 5%;
+    text-align: center;
+    width: fit-content;
+}
+
+.text{
+    font-size: 30px;
+    margin-top: 0px;
+}
+
+.btn{
+        margin: 5px;
+}

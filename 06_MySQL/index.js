@@ -33,7 +33,7 @@ const connection = mysql.createConnection({
   host: "localhost",
   user: "root",
   database: "test_01",
-  password: "PRIVATE"
+  password: "SQL@FIRSTDB01"
 })
 
 app.get("/user", (req, res) => {
